@@ -1,0 +1,23 @@
+.card {
+  padding: 20px;
+  margin: 25px auto;
+  //   &:first-child {
+  //     background-color: red;
+  //   }
+
+  a,
+  a:hover {
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .card-title {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+  }
+  .author {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
