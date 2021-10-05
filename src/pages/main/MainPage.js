@@ -6,24 +6,18 @@ import Navigation from "../../components/nav/navigation/Navigation";
 
 import "./mainPage.scss";
 
-const MainPage = () => {
-  let allNews = null;
-  let userData = null;
-  const getFromLocalStorage = () => {
-    allNews = JSON.parse(localStorage.getItem("allNews"));
-    userData = JSON.parse(localStorage.getItem("userData"));
-  };
-  getFromLocalStorage();
+const MainPage = (props) => {
+  console.log("main page log : ", props);
   return (
     <Container>
-      <Navigation {...userData} />
-      <Container>
+      <Navigation {...props} />
+      {/* <Container>
         <Row className="row">
           {allNews.map((title) => (
             <NewsFeed {...title} key={title.publishedAt} />
           ))}
         </Row>
-      </Container>
+      </Container> */}
     </Container>
   );
 };

@@ -1,44 +1,58 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-
-import { useHistory } from "react-router-dom";
-import { useAuth } from "../../components/auth/Auth";
-
 import axios from "axios";
+
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
+import { useAuth } from "../../components/auth/Auth";
+import { loginEmailStart } from "../../redux/login/login.actions";
+
 import "./login.scss";
 
-export default function Login() {
+const mapState = (state) => ({
+  userName: state.userName,
+  // userEmail: state.userEmail,
+  // userApiKey: state.userApiKey,
+  // userCategory: state.userCategory,
+  // news: state.news,
+  // userErorr: state.userErorr,
+});
+
+export default function Login(props) {
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(mapState);
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  let history = useHistory();
   let auth = useAuth();
 
-  const onSubmit = (data) => {
+  const onSubmit = (userData) => {
     axios
       .get(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${data.category}&apiKey=${data.apiKey}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=${userData.category}&apiKey=${userData.apiKey}`
       )
       .then((response) => {
         console.log(response.data.articles);
         auth.signin(() => {
           history.push("/main");
-          setToLocal(response.data.articles, data);
+          console.log("currentUser : ", currentUser);
+          // (currentUser.userName = userData.name),
+          //   (currentUser.userEmail = userData.Email),
+          //   (currentUser.userApiKey = userData.apiKey),
+          //   (currentUser.userCategory = userData.category),
+          //   (currentUser.news = response.data.articles),
+          dispatch(loginEmailStart());
         });
       })
       .catch((error) => console.log(error));
   };
   console.log(errors);
-
-  const setToLocal = (news, userData) => {
-    localStorage.setItem("allNews", JSON.stringify(news));
-    localStorage.setItem("userData", JSON.stringify(userData));
-  };
 
   return (
     <Container fluid className="login">
@@ -105,8 +119,8 @@ export default function Login() {
         <Col className="mt-5">
           <h3>How to make API key:</h3>
           <p>
-            Please follow the
-            <a href="https://newsapi.org/docs/get-started"> link</a> to make API
+            Please follow this{" "}
+            <a href="https://newsapi.org/docs/get-started">link</a> to make API
             key for your self, its easy and free. You also can chosse from
             diffrect category news
           </p>
