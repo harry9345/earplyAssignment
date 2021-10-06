@@ -7,6 +7,7 @@ import { AuthButton } from "../../../components/auth/Auth";
 import "./navigation.scss";
 
 export default function Navigation(props) {
+  console.log("nav props : ", props);
   return (
     <Navbar fixed="top" bg="light" expand="lg" className="navbar">
       <Container fluid>

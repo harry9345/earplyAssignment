@@ -1,7 +1,8 @@
 import loginTypes from "./login.types";
 
-export const loginEmailStart = () => ({
+export const loginEmailStart = (info) => ({
   type: loginTypes.LOGIN_START,
+  payload: info,
 });
 
 export const logoutEmailStart = () => ({

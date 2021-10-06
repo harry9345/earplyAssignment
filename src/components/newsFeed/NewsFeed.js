@@ -8,7 +8,7 @@ import "./newsFeed.scss";
 const NewsFeed = (props) => {
   return (
     <Col>
-      <NavLink to={"/story/" + props.url}>
+      <NavLink to={"/story/" + props.author}>
         <Card style={{ width: "40rem" }} key={props.publishedAt}>
           <Image src={props.urlToImage} />
           <Card.Title>

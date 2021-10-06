@@ -20,10 +20,13 @@ function App() {
             <PrivateRoute path="/main">
               <MainPage />
             </PrivateRoute>
-            <PrivateRoute
+            {/* <PrivateRoute
               path="/story/:id"
               render={(props) => <Story {...props} />}
-            />
+            /> */}
+            <PrivateRoute path="/story/:id">
+              <Story />
+            </PrivateRoute>
             {/* <PrivateRoute path="/profile">
               <Profile />
             </PrivateRoute> */}

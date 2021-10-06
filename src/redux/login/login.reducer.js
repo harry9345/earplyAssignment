@@ -10,15 +10,16 @@ const INITIAL_STATE = {
 };
 
 const loginReducer = (state = INITIAL_STATE, action) => {
+  console.log("payload : ", action.payload);
   switch (action.type) {
     case loginTypes.LOGIN_START:
       return {
         ...state,
-        news: state.news,
-        userName: state.userName,
-        userEmail: state.userEmail,
-        userApiKey: state.userApiKey,
-        userCategory: state.userCategory,
+        news: action.payload.news,
+        userName: action.payload.userName,
+        userEmail: action.payload.userEmail,
+        userApiKey: action.payload.userApiKey,
+        userCategory: action.payload.userCategory,
       };
     case loginTypes.LOGOUT_START:
       return {
